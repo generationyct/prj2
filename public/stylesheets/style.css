@@ -1,8 +1,59 @@
+/*----------------------- Resetting margins and padding --------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+/*----------------------- Header Styles --------------------------*/
+.header-wrapper {
+  height: 80px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 65px;
+  margin-left: 15px;
+}
+
+.header-ctas {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-button {
+  /* width: 180px;
+  height: 60px; */
+  background: #2DC5FA 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  color: white;
+  border: none;
+  padding: 15px 38px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+/*----------------------- Footer Styles --------------------------*/
+.footer-wrapper {
+  height: 200px;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
