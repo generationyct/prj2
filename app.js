@@ -1,15 +1,16 @@
-const createError     = require('http-errors');
-const express         = require('express');
-const path            = require('path');
-const hbs             = require('hbs');
-const mongoose        = require('mongoose');
-const bodyParser      = require('body-parser');
-const favicon         = require('serve-favicon');
-const passport        = require('passport');
-const cookieParser    = require('cookie-parser');
-const logger          = require('morgan');
+const createError     = require('http-errors')
+const express         = require('express')
+const path            = require('path')
+const hbs             = require('hbs')
+const mongoose        = require('mongoose')
+const bodyParser      = require('body-parser')
+const favicon         = require('serve-favicon')
+const passport        = require('passport')
+const cookieParser    = require('cookie-parser')
+const logger          = require('morgan')
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index')
+const userRouter = require('./routes/auth/user')
 
 const app = express();
 
@@ -37,7 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // register partials
 hbs.registerPartials(__dirname + "/views/partials")
 
-app.use('/', indexRouter);
+// taking routes in
+app.use('/', indexRouter)
+app.use(userRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,7 +1,14 @@
 const express = require('express')
+const User = require('../../models/user')
 const userRouter = new express.Router()
 
 // user routes
+
+userRouter.get('/users', (req, res) => {
+  res.send('Hello from the /users route!')
+})
+
+
 // userRouter.post('/users', async (req, res) => {
 //   const user = new user(req.body)
 
@@ -13,3 +20,5 @@ const userRouter = new express.Router()
 //     res.send(400).send(err)
 //   }
 // })
+
+module.exports = userRouter
