@@ -45,6 +45,7 @@ body {
 .header-logo {
   height: 55px;
   margin-left: 20px;
+  vertical-align: middle;
 }
 
 .header-ctas {
