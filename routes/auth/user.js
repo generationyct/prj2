@@ -5,8 +5,8 @@ const userRouter = new express.Router()
 
 // user routes
 
-userRouter.get('/users', (req, res) => {
-  res.send('Hello from the /users route!')
+userRouter.get('/signup', (req, res) => {
+  res.render('auth/signup')
 })
 
 
