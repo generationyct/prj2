@@ -18,6 +18,12 @@
 
 /*----------------------- Header Styles --------------------------*/
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
 body {
   font-family: rift,sans-serif;
   font-weight: 400;
