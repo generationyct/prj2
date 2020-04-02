@@ -9,6 +9,7 @@ userRouter.get('/signup', (req, res) => {
   res.render('auth/signup')
 })
 
+// user post routes
 
 userRouter.post('/signup', async (req, res) => {
   const user = new User(req.body)
