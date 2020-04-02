@@ -38,6 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // register partials
 hbs.registerPartials(__dirname + "/views/partials")
 
+// making response in json format possible for API
+app.use(express.json())
+
 // taking routes in
 app.use('/', indexRouter)
 app.use(userRouter)
