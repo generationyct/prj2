@@ -19,7 +19,7 @@ userRouter.post('/signup', async (req, res) => {
     res.status(201).send({ user })
 
   } catch (err) {
-    res.sendStatus(400).send(err)
+    res.status(400).send({ err })
   }
 })
 
