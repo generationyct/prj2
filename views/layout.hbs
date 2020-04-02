@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://use.typekit.net/ymv3tle.css">
-  </head>
-  <body>
-    {{> header }}
-      <div class="container">
-      {{{body}}}
-      </div>
-    {{> footer }}
-  </body>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/index.css' />
+  <link rel='stylesheet' href='/stylesheets/signup.css' />
+  <link rel='stylesheet' href='/stylesheets/layout.css' />
+  <link rel="stylesheet" href="https://use.typekit.net/ymv3tle.css">
+</head>
+
+<body>
+  {{> header }}
+  <div class="container">
+    {{{body}}}
+  </div>
+  {{> footer }}
+</body>
+
 </html>

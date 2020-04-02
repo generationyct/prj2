@@ -33,7 +33,7 @@ body {
   /* box-sizing: border-box; */
 }
 .header-wrapper {
-  height: 60px;
+  height: 70px;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -75,12 +75,11 @@ body {
 }
 
 .container {
-  background-color: aquamarine;
-  height: 80vh;
+  
 }
 
 /*----------------------- Footer Styles --------------------------*/
-.footer-wrapper {
+.footer {
   height: 200px;
   background-color: aliceblue;
   display: flex;
