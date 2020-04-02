@@ -1,30 +1,44 @@
-/*----------------------- Resetting margins and padding --------------------------*/
-* {
-  margin: 0;
-  padding: 0;
-}
+/*--- fonts used from Adobe fonts ----
 
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/*  font-family: rift,sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+/* 
+    font-family: rift,sans-serif;
+    font-weight: 400;
+    font-style: italic; */
 
-a {
-  color: #00B7FF;
-}
+/*  font-family: rift,sans-serif;
+    font-weight: 700;
+    font-style: italic; */
+
+/*  font-family: rift,sans-serif;
+    font-weight: 700;
+    font-style: normal; */
 
 /*----------------------- Header Styles --------------------------*/
+
+body {
+  font-family: rift,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
 .header-wrapper {
-  height: 80px;
+  height: 60px;
   background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-right: 40px;
   align-items: center;
 }
 
 .header-logo {
-  height: 65px;
-  margin-left: 15px;
+  height: 55px;
+  margin-left: 20px;
 }
 
 .header-ctas {
@@ -33,19 +47,29 @@ a {
 }
 
 .header-button {
-  /* width: 180px;
-  height: 60px; */
-  background: #2DC5FA 0% 0% no-repeat padding-box;
-  border-radius: 8px;
-  color: white;
-  border: none;
-  padding: 15px 38px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-right: 20px;
-  cursor: pointer;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #2DC5FA ;
+    border-radius: 4px;
+    border: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.85px;
+    font-weight: 700;
+    line-height: 4px;
+    padding: 15px 15px;
+    font-size: 18px;
+    text-align: center;
+    /* margin-top: 5px; */
+    margin-left: 40px;
+    width: 8rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.container {
+  background-color: aquamarine;
+  height: 80vh;
 }
 
 /*----------------------- Footer Styles --------------------------*/
