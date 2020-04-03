@@ -1,4 +1,4 @@
-.signup {
+.login {
     height: 60vh;
     display: flex;
     flex-direction: row;
@@ -9,7 +9,7 @@
     margin: auto;
 }
 
-.signup__msg {
+.login__msg {
     background-image: url(../img/coffee.jpeg);
     border-radius: 20px;
     width: 55%;
@@ -18,7 +18,7 @@
     min-width: 350px;
 }
 
-.signup__form {
+.login__form {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #707070;
     border-radius: 20px;
@@ -32,7 +32,7 @@
     padding-top: 2rem;
 }
 
-.signup__form>p {
+.login__form>p {
     font-size: 1.2rem;
     text-align: left;
     letter-spacing: 0px;
@@ -40,7 +40,7 @@
     opacity: 1;
 }
 
-.signup__form>form {
+.login__form>form {
     height: 90%;
     display: flex;
     flex-direction: column;
