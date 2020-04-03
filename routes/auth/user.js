@@ -9,6 +9,10 @@ userRouter.get('/signup', (req, res) => {
   res.render('auth/signup')
 })
 
+userRouter.get('/login', (req, res) => {
+  res.render('auth/login')
+})
+
 // user post routes
 
 userRouter.post('/signup', async (req, res) => {
