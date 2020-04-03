@@ -30,7 +30,8 @@ userRouter.post('/signup', async (req, res) => {
 userRouter.post('/login', async (req, res) => {
   try {
       const user = await User.findByCredentials(req.body.email, req.body.password)
-      res.send(user)
+      const token = await user.generateAuthToken()
+      res.send( { user, token })
   } catch (err) {
       res.status(400).send('Login failed')
   }
