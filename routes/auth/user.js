@@ -32,7 +32,7 @@ userRouter.post('/login', async (req, res) => {
       const user = await User.findByCredentials(req.body.email, req.body.password)
       res.send(user)
   } catch (err) {
-      res.status(400).send()
+      res.status(400).send('Login failed')
   }
 })
 
