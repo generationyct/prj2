@@ -38,9 +38,19 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+userSchema.methods.toJSON = function () {
+  const user = this
+  const userObject = user.toObject()
+
+  delete userObject.password
+  delete userObject.tokens
+
+  return userObject
+}
+
 userSchema.methods.generateAuthToken = async function () {
   const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'thisisironfoodgreatfoodinamsterdam')
+  const token = jwt.sign({ _id: user._id.toString() }, 'thisisironfoodgreatfoodinamsterdam', { expiresIn: '7 days'})
   
   user.tokens = user.tokens.concat({ token })
   await user.save()
@@ -71,7 +81,7 @@ userSchema.pre('save', async function (next) {
   const user = this
 
   if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 10)
+    user.password = await bcrypt.hash(user.password, 8)
   }
 
   next()
