@@ -5,7 +5,6 @@ const hbs             = require('hbs')
 const mongoose        = require('mongoose')
 const bodyParser      = require('body-parser')
 const favicon         = require('serve-favicon')
-const passport        = require('passport')
 const cookieParser    = require('cookie-parser')
 const logger          = require('morgan')
 

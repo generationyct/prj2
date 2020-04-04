@@ -13,6 +13,12 @@ userRouter.get('/login', (req, res) => {
   res.render('auth/login')
 })
 
+userRouter.get('/users', auth, (req, res) => {
+  res.render('auth/users')
+})
+
+
+
 // user post routes
 
 userRouter.post('/signup', async (req, res) => {
