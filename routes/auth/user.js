@@ -13,6 +13,15 @@ userRouter.get('/login', (req, res) => {
   res.render('auth/login')
 })
 
+userRouter.get('/users', auth, async (req, res) => {
+  try {
+    const users = await User.find({})
+    res.render('auth/users')
+  } catch (err) {
+    res.status(500).send()
+  }
+})
+
 // user post routes
 
 userRouter.post('/signup', async (req, res) => {
