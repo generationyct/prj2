@@ -1,6 +1,6 @@
 
 .tips {
-    /* height: 40vh; */
+    min-height: 60vh;
     display: grid;
     max-width: 1200px;
     margin: auto;
