@@ -3,7 +3,7 @@ const User = require('../../models/user')
 const auth = require('../../middleware/auth')
 const userRouter = new express.Router()
 
-// user routes
+// user GET routes
 
 userRouter.get('/signup', (req, res) => {
   res.render('auth/signup')
@@ -13,10 +13,9 @@ userRouter.get('/login', (req, res) => {
   res.render('auth/login')
 })
 
-userRouter.get('/users/profile', auth, async (req, res) => {
-  // res.render('users/profile')
-  res.send('Hi from the users/profile')
-  // res.send(req.user)
+// user Profile
+userRouter.get('/users/me', auth, async (req, res) => {
+  res.send(req.user)
 })
 
 // user post routes
@@ -27,7 +26,8 @@ userRouter.post('/signup', async (req, res) => {
   try {
     await user.save()
     const token = await user.generateAuthToken()
-    res.status(201).send({ user, token })
+    res.cookie('auth_token', token)
+    res.status(201).send({ message: "Sign up worked" })
 
   } catch (err) {
     res.status(400).send({ err })
@@ -38,9 +38,10 @@ userRouter.post('/login', async (req, res) => {
   try {
       const user = await User.findByCredentials(req.body.email, req.body.password)
       const token = await user.generateAuthToken()
-      res.send( { user, token })
-  } catch (err) {
-      res.status(400).send('Login failed')
+      res.cookie('auth_token', token)
+      res.status(201).send({ message: "You are now logged in!" })
+  } catch (e) {
+      res.status(400).send()
   }
 })
 
@@ -51,9 +52,9 @@ userRouter.post('/logout', auth, async (req, res) => {
       })
       await req.user.save()
 
-      res.send()
+      res.send('You are now logged out!')
   } catch (err) {
-    res.status(500).send('You are loggout!')
+    res.status(500).send('Something went wrong sorry!')
   }
 })
 
