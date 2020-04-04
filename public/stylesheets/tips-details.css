@@ -9,7 +9,7 @@
 }
 
 .tips__details__description {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .tips__details__description > h1 {
@@ -57,6 +57,7 @@ margin-bottom: 1rem;
 }
 
 .tips__details__address {
+    padding-left: 1rem;
 }
 
 .tips__details__description__openinghours{
