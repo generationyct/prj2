@@ -27,7 +27,7 @@ userRouter.post('/signup', async (req, res) => {
     await user.save()
     const token = await user.generateAuthToken()
     res.cookie('auth_token', token)
-    res.status(201).send({ message: "Sign up worked" })
+    res.render('tips')
 
   } catch (err) {
     res.status(400).send({ err })
@@ -58,5 +58,18 @@ userRouter.post('/logout', auth, async (req, res) => {
     res.status(500).send('Something went wrong sorry!')
   }
 })
+
+// userRouter.get('/logout', auth, async (req, res) => {
+//   try {
+//       req.logOut()
+//       res.status(200).clearCookie('connect.sid', {
+//         path: '/'
+//       })
+//   } catch (err) {
+//     res.status(500).send('Something went wrong sorry!')
+//   }
+// })
+
+
 
 module.exports = userRouter
