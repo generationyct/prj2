@@ -39,7 +39,8 @@ userRouter.post('/login', async (req, res) => {
       const user = await User.findByCredentials(req.body.email, req.body.password)
       const token = await user.generateAuthToken()
       res.cookie('auth_token', token)
-      res.status(201).send({ message: "You are now logged in!" })
+      res.render('tips')
+      // res.status(201).send({ message: "You are now logged in!" })
   } catch (e) {
       res.status(400).send()
   }
