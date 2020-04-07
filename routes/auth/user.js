@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../../models/user')
+const Tip = require('../../models/tips')
 const auth = require('../../middleware/auth')
 const userRouter = new express.Router()
 
@@ -69,7 +70,6 @@ userRouter.post('/logout', auth, async (req, res) => {
 //     res.status(500).send('Something went wrong sorry!')
 //   }
 // })
-
 
 
 module.exports = userRouter

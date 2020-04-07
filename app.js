@@ -11,6 +11,7 @@ const logger          = require('morgan')
 
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/auth/user')
+const tipRouter = require('./routes/tips')
 
 const app = express();
 
@@ -44,6 +45,9 @@ app.use(express.json())
 // taking routes in
 app.use('/', indexRouter)
 app.use(userRouter)
+
+app.use('/', tipRouter)
+app.use(tipRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
