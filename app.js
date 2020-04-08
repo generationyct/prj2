@@ -17,16 +17,19 @@ const passportUserRouter = require('./routes/passport/passportUserRouter')
 
 const app = express();
 
+// Atlas db config
+const db = require('./config/keys').MongoURI;
+
 // use mongoose
 
-mongoose
-  .connect('mongodb://localhost/ironfood', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+    console.log(`Connected to Mongo Atlas Database name: '${x.connections[0].name}'`)
   })
   .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+    console.log('Error connecting to mongo', err)
+  })
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'), path.join(__dirname, 'views/passport'));
