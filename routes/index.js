@@ -7,10 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-// router.get('/tips', function(req, res, next) {
-//   res.render('tips', { title: 'All tips' });
-// });
-
 router.get('/tips-detail', function(req, res, next) {
   res.render('tips-detail', { title: 'Tips detail' });
 });
