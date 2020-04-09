@@ -74,6 +74,16 @@ body {
     cursor: pointer;
 }
 
+.header-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2DC5FA ;
+  text-decoration: underline;
+  margin-left: 2rem;
+  height: 2rem;
+  margin-top: 0.2rem;
+}
+
 .container {
   
 }
