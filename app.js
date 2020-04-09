@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
 app.use(session({
-  secret: 'does not mather',
+  secret: 'doesnotmather',
   resave: true,
   saveUninitialized: true
 }))

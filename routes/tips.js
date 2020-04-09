@@ -7,7 +7,11 @@ const tipRouter = new express.Router()
 
 tipRouter.get('/tips', (req, res) => {
     res.render('tips')
-  })
+})
+
+tipRouter.get('/tips-detail', (req, res) => {
+    res.render('tips-detail')
+})
 
 tipRouter.post('/tips', async (req, res) => {
     // const tip = new Tip(req.body)
