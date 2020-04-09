@@ -69,3 +69,12 @@ opacity: 1;
 border: none;
 height: 3.5rem;
 }
+
+.signup_flashmessage {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: crimson;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
