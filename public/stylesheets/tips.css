@@ -31,8 +31,8 @@
 }
 
 .tips__item__title {
-    height: 20%;
-    font-size: 1.2rem;
+    height: 15%;
+    font-size: 1rem;
     font-weight: 700;
     display: flex;
     text-align: center;
@@ -41,7 +41,17 @@
 }
 
 .tips__item__image {
-    height: 80%;
+    height: 55%;
     object-fit: cover;
     overflow: hidden;
+}
+
+.tips__item__name {
+    height: 30%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
 }
