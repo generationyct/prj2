@@ -1,6 +1,7 @@
-const express = require('express')
-const passportUserRouter = express.Router()
-const bcrypt = require('bcryptjs')
+const express             = require('express')
+const passportUserRouter  = express.Router()
+const bcrypt              = require('bcryptjs')
+const passport            = require('passport')
 
 // User model
 const UserPassport = require('../../models/userPassport')
@@ -14,6 +15,11 @@ passportUserRouter.get('/login', (req, res, next) => {
 // register Page
 passportUserRouter.get('/register', (req, res, next) => {
   res.render('passport/register', { title: 'Iron Food Passport' });
+});
+
+// Error page route
+passportUserRouter.get('/error', (req, res, next) => {
+  res.render('passport/error', { title: 'Iron Food Passport Error' });
 });
 
 // register Post handler
@@ -52,7 +58,7 @@ passportUserRouter.post('/register', (req, res) => {
         if(user) {
           // user exists
           errors.push({ msg: 'Email is already registered'})
-          res.render('register', {
+          res.render('passport/error', {
             errors,
             name,
             email,
@@ -76,7 +82,8 @@ passportUserRouter.post('/register', (req, res) => {
               // Save user
               newUser.save()
                 .then(user => {
-                  res.redirect('/tips-detail')
+                  console.log(req.flash('success_msg', 'You are now registered and can log in')) 
+                  res.redirect('/tips')
                 })
                 .catch(err => console.log(err))
           }))
@@ -86,4 +93,14 @@ passportUserRouter.post('/register', (req, res) => {
 
 })
 
+// Login Handle
+passportUserRouter.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/tips',
+    failureRedirect: '/error',
+    // failureFlash: true
+  })(req, res, next)
+})
+
+// 
 module.exports = passportUserRouter

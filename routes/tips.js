@@ -6,7 +6,7 @@ const tipRouter = new express.Router()
 
 
 tipRouter.get('/tips', (req, res) => {
-    res.render('tips-add')
+    res.render('tips')
   })
 
 tipRouter.post('/tips', async (req, res) => {
