@@ -1,92 +1,98 @@
-const mongoose  = require('mongoose')
-const validator = require('validator')
-const bcrypt    = require('bcryptjs')
-const jwt       = require('jsonwebtoken')
+// const mongoose  = require('mongoose')
+// const validator = require('validator')
+// const bcrypt    = require('bcryptjs')
+// const jwt       = require('jsonwebtoken')
 
-const userSchema = new mongoose.Schema({
-  name: {
-      type: String,
-      trim: true,
-  },
-  email: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error('Email is invalid')
-        }
-      }
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 7,
-    trim: true,
-    validate(value) {
-      if (value.toLowerCase().includes('password')) {
-        throw new Error('Password may not contain "password"')
-      }
-    }
-  },
-  tokens: [{
-      token: {
-        type: String,
-        required: true
-      }
-    }]
-})
+// const userSchema = new mongoose.Schema({
+//   name: {
+//       type: String,
+//       trim: true,
+//   },
+//   email: {
+//       type: String,
+//       required: true,
+//       trim: true,
+//       lowercase: true,
+//       validate(value) {
+//         if (!validator.isEmail(value)) {
+//           throw new Error('Email is invalid')
+//         }
+//       }
+//   },
+//   password: {
+//     type: String,
+//     required: true,
+//     minlength: 7,
+//     trim: true,
+//     validate(value) {
+//       if (value.toLowerCase().includes('password')) {
+//         throw new Error('Password may not contain "password"')
+//       }
+//     }
+//   },
+//   tokens: [{
+//       token: {
+//         type: String,
+//         required: true
+//       }
+//     }]
+// })
 
-userSchema.methods.toJSON = function () {
-  const user = this
-  const userObject = user.toObject()
+// userSchema.virtual('tips', {
+//   ref: 'Tip',
+//   localField: '_id',
+//   foreignField: 'author'
+// })
 
-  delete userObject.password
-  delete userObject.tokens
+// userSchema.methods.toJSON = function () {
+//   const user = this
+//   const userObject = user.toObject()
 
-  return userObject
-}
+//   delete userObject.password
+//   delete userObject.tokens
 
-userSchema.methods.generateAuthToken = async function () {
-  const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'thisisironfoodgreatfoodinamsterdam', { expiresIn: '7 days'})
+//   return userObject
+// }
+
+// userSchema.methods.generateAuthToken = async function () {
+//   const user = this
+//   const token = jwt.sign({ _id: user._id.toString() }, 'thisisironfoodgreatfoodinamsterdam', { expiresIn: '7 days'})
   
-  user.tokens = user.tokens.concat({ token })
-  await user.save()
+//   user.tokens = user.tokens.concat({ token })
+//   await user.save()
   
-  return token
-}
+//   return token
+// }
 
-// check if the user account trying to login is present
+// // check if the user account trying to login is present
 
-userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email })
+// userSchema.statics.findByCredentials = async (email, password) => {
+//     const user = await User.findOne({ email })
 
-    if (!user) {
-      throw new Error('Unable to login')
-    }
+//     if (!user) {
+//       throw new Error('Unable to login')
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+//     const isMatch = await bcrypt.compare(password, user.password)
 
-    if (!isMatch) {
-      throw new Error('Unable to login')
-    }
+//     if (!isMatch) {
+//       throw new Error('Unable to login')
+//     }
 
-    return user
-}
+//     return user
+// }
 
-// hash the plain text password before (pre) saving
-userSchema.pre('save', async function (next) {
-  const user = this
+// // hash the plain text password before (pre) saving
+// userSchema.pre('save', async function (next) {
+//   const user = this
 
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8)
-  }
+//   if (user.isModified('password')) {
+//     user.password = await bcrypt.hash(user.password, 8)
+//   }
 
-  next()
-})
+//   next()
+// })
 
-const User = mongoose.model('User', userSchema)
+// const User = mongoose.model('User', userSchema)
 
-module.exports = User
+// module.exports = User
