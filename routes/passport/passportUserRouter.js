@@ -102,5 +102,11 @@ passportUserRouter.post('/login', (req, res, next) => {
   })(req, res, next)
 })
 
+passportUserRouter.get('/logout', (req, res) => {
+  req.logout()
+  req.flash('success_msg', 'You are logged out')
+  res.redirect('/login')
+})
+
 // 
 module.exports = passportUserRouter
