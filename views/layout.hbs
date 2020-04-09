@@ -13,7 +13,13 @@
 </head>
 
 <body>
+
+  {{!-- header is the standard header including the signup and login buttons --}}
   {{> header }}
+
+{{!-- headerloggedin is the header we want to show once the user is logged in. It includes the "add tip" button and logout link --}}
+  {{!-- {{> headerloggedin }} --}}
+
   <div class="container">
     {{{body}}}
   </div>
