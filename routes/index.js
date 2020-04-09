@@ -15,4 +15,8 @@ router.get('/tips-detail', function(req, res, next) {
   res.render('tips-detail', { title: 'Tips detail' });
 });
 
+router.get('/tips-add', function(req, res, next) {
+  res.render('tips-add', { title: 'Add your food tip to Iron Food' });
+});
+
 module.exports = router;
