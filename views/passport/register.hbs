@@ -11,8 +11,8 @@
       <input type="text" name="password" id="password" placeholder="Password">
       <input type="text" name="confirmpassword" id="confirmpassword" placeholder="Confirm password">
       
-        {{#if errorMessage }}
-    <div class="signup_flashmessage">{{ errorMessage }}</div>
+        {{#if msg }}
+    <div class="signup_flashmessage">{{ msg }}</div>
   {{/if}}
             <button id="btn-submit" type="submit">Create account</button>
     </form>
