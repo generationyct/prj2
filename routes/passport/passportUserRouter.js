@@ -1,5 +1,9 @@
 const express = require('express')
 const passportUserRouter = express.Router()
+const bcrypt = require('bcryptjs')
+
+// User model
+const UserPassport = require('../../models/userPassport')
 
 // login Page
 passportUserRouter.get('/login', (req, res, next) => {
@@ -18,9 +22,9 @@ passportUserRouter.post('/register', (req, res) => {
   let errors = []
 
   // check required fields
-  if(!email || !password || confirmpassword) {
-    errors.push({ msg: 'Please fill in all required fields'})
-  }
+  // if(!email || !password || confirmpassword) {
+  //   errors.push({ msg: 'Please fill in all required fields'})
+  // }
 
   // check passwords match
   if(password !== confirmpassword) {
@@ -42,7 +46,42 @@ passportUserRouter.post('/register', (req, res) => {
   })
 
   }else {
-    res.send('pass registration')
+    // Validation passed
+    UserPassport.findOne( { email })
+      .then(user => {
+        if(user) {
+          // user exists
+          errors.push({ msg: 'Email is already registered'})
+          res.render('register', {
+            errors,
+            name,
+            email,
+            password,
+            confirmpassword
+          })
+        } else {
+          const newUser = new UserPassport({
+            name,
+            email,
+            password
+          })
+
+
+          // Hash Password
+          bcrypt.genSalt(10, (err, salt) => 
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if(err) throw err
+              // Set password to hash
+              newUser.password = hash
+              // Save user
+              newUser.save()
+                .then(user => {
+                  res.redirect('/tips-detail')
+                })
+                .catch(err => console.log(err))
+          }))
+        }
+      })
   }
 
 })
