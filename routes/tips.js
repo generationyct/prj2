@@ -1,8 +1,8 @@
 const express = require('express')
 const Tip = require('../models/tips')
 const User = require('../models/user')
-const auth = require('../middleware/auth')
 const tipRouter = new express.Router()
+const { ensureAuthenticated } = require('../config/auth')
 
 
 tipRouter.get('/tips', (req, res) => {
@@ -13,7 +13,7 @@ tipRouter.get('/tips-detail', (req, res) => {
     res.render('tips-detail')
 })
 
-tipRouter.get('/tips-add', (req, res) => {
+tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
     res.render('tips-add')
 })
 
