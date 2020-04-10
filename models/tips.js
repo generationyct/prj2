@@ -2,23 +2,32 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const tipSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
   },
-  body: {
+  category: { type: String, 
+    enum: ['Coffee', 'Lunch', 'Snacks', 'Dinner'] 
+  },
+  description: {
     type: String,
   },
-  comments: [ {
-    body: String,
-    data: Date
-  }],
+  website: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
+  imageUrl: {
+    type: String,
+    default: 'img/cat_lunch.png'
+  },
   date: {
     type: Date,
     default: Date.now
   },
-  author: [ { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User' 
+  author: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }]
 })
 
