@@ -13,6 +13,10 @@ tipRouter.get('/tips-detail', (req, res) => {
     res.render('tips-detail')
 })
 
+tipRouter.get('/tips-add', (req, res) => {
+    res.render('tips-add')
+})
+
 tipRouter.post('/tips', async (req, res) => {
     // const tip = new Tip(req.body)
     // await req.user.populate('tip').execPopulate()
