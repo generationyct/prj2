@@ -12,7 +12,6 @@ const session         = require('express-session')
 const flash           = require('connect-flash')
 
 const indexRouter = require('./routes/index')
-// const userRouter = require('./routes/auth/user')
 const tipRouter = require('./routes/tips')
 const passportRouter = require('./routes/passport/passportRouter')
 const passportUserRouter = require('./routes/passport/passportUserRouter')
