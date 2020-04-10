@@ -4,10 +4,18 @@ const User = require('../models/user')
 const tipRouter = new express.Router()
 const { ensureAuthenticated } = require('../config/auth')
 
+tipRouter.get('/tips', (req, res, next) => {
+    Tip.find()
+      .then(allTheTipsFromDB => {
+        console.log('Retrieved tips from DB:', allTheTipsFromDB);
+      })
+      .catch(error => {
+        console.log('Error while getting the tips from the DB: ', error);
+      })
+    res.render('tips', { tips: allTheTipsFromDB });
 
-tipRouter.get('/tips', (req, res) => {
-    res.render('tips')
-})
+  });
+
 
 tipRouter.get('/tips-detail', (req, res) => {
     res.render('tips-detail')
