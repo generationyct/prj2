@@ -34,12 +34,14 @@ passportUserRouter.post('/register', (req, res) => {
 
   // check passwords match
   if(password !== confirmpassword) {
-    errors.push({ msg: 'Passwords do not match'})
+    res.render('passport/register', { msg: 'Passwords do not match'})
   }
 
   // check password length
   if(password.length <6 ) {
-    errors.push({ msg: 'Password should be at least 6 characters'})
+    // errors.push({ msg: 'Password should be at least 6 characters'})
+    res.render('passport/register', { msg: 'Password should be at least 6 characters'})
+
   }
 
   if(errors.length > 0) {

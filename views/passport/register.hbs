@@ -10,8 +10,11 @@
       <input type="text" name="email" id="email" placeholder="Your e-mail">
       <input type="text" name="password" id="password" placeholder="Password">
       <input type="text" name="confirmpassword" id="confirmpassword" placeholder="Confirm password">
-
-      <button id="btn-submit" type="submit">Create account</button>
+      
+        {{#if msg }}
+    <div class="signup_flashmessage">{{ msg }}</div>
+  {{/if}}
+            <button id="btn-submit" type="submit">Create account</button>
     </form>
   </div>
 </div>
