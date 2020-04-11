@@ -10,12 +10,33 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    height: 50vh;
 }
 
 .hero__title {
     max-width: 900px;
+    margin: 0;
+    padding: 0;
 }
+
+.hero__title h1 {
+    font-size: 4rem;
+    font-family: rift,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: -10px;
+    padding: 0;
+    
+}
+
+.hero__title h3 {
+    font-size: 1.5rem;
+    font-family: rift,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: -20px;
+}
+
 
 .teaser {
     height: 40vh;
@@ -24,13 +45,15 @@
     margin: auto;
     grid-template-columns: 225px 225px 225px;
     grid-auto-rows: auto;
-    grid-gap: 60px;
+    grid-gap: 80px;
     justify-content: center;
     align-content: center;
 }
 
 .teaser__item {
-    border: 1px solid #707070;
+    border: 0.5px solid #aeaeae;
+    border-radius: 2px;
+    width: 17rem;
     height: 225px;
     display: flex;
     flex-direction: column;
@@ -51,5 +74,6 @@
 }
 
 .teaser__item__image > img {
-    width: 300px;
+    width: 17rem;
+    /* padding: ; */
 }
