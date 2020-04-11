@@ -27,7 +27,7 @@ const tipSchema = new mongoose.Schema({
   },
   author: [{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'UserPassport'
   }]
 })
 
