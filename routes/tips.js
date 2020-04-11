@@ -1,21 +1,22 @@
 const express = require('express')
-const Tip = require('../models/tips')
+const Tip = require('../models/tip')
 const User = require('../models/user')
 const tipRouter = new express.Router()
 const { ensureAuthenticated } = require('../config/auth')
 
+
+
+
 tipRouter.get('/tips', (req, res, next) => {
     Tip.find()
-      .then(allTheTipsFromDB => {
-        console.log('Retrieved tips from DB:', allTheTipsFromDB);
+      .then(tipsFromDB => {
+        console.log('Retrieved books from DB:', tipsFromDB);
+        res.render('tips', {user: req.user, tips: tipsFromDB });
       })
       .catch(error => {
         console.log('Error while getting the tips from the DB: ', error);
       })
-    res.render('tips', { tips: allTheTipsFromDB });
-
   });
-
 
 tipRouter.get('/tips-detail', (req, res) => {
     res.render('tips-detail')

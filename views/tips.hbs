@@ -1,5 +1,5 @@
 <div class="tips">
-    <a href="#"> <div class="tips__item">
+    {{!-- <a href="#"> <div class="tips__item">
         <div class="tips__item__title">Lunch</div>
         <img src="../img/cat_lunch.png" alt="" class="tips__item__image">
        <div class="tips__item__name">Pad Thai World</div>
@@ -136,14 +136,15 @@
         <div class="tips__item__title">Dinner</div>
         <img src="../img/cat_dinner.png" alt="" class="tips__item__image">
        <div class="tips__item__name">Dinner Place</div>
-    </div></a>
-
-
-    {{!-- {{#each tips}}
-        <a href="#"> <div class="tips__item">
-        <div class="tips__item__title">{{this.category}}</div>
-        <img src="{{this.imageUrl}}" alt="" class="tips__item__image">
-       <div class="tips__item__name">{{this.name}}</div>
     </div></a> --}}
+
+
+    {{#each tips}}
+        <a href="#"><div class="tips__item">
+        <div class="tips__item__title">{{this.category}}</div>
+        <img src="img/cat_{{this.category}}.png" alt="" class="tips__item__image">
+       <div class="tips__item__name">{{this.name}}</div>
+    </div></a>
+    {{/each}}
     
 </div>
