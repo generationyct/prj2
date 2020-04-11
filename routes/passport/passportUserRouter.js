@@ -98,7 +98,7 @@ passportUserRouter.post('/register', (req, res) => {
 // Login Handle
 passportUserRouter.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/tips-detail',
+    successRedirect: '/tips',
     failureRedirect: '/error',
     // failureFlash: true
   })(req, res, next)

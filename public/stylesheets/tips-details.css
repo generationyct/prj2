@@ -12,6 +12,14 @@
     padding: 1rem;
 }
 
+.tips__details__description__hero{
+    background-image: url(../img/cat_Dinner.png);
+    background-size: cover;
+    background-position: center;
+    padding: 1rem;
+    min-height: 12vh;
+}
+
 .tips__details__description>h1 {
     margin-bottom: 1rem;
 }
@@ -20,7 +28,7 @@
     margin-bottom: 1rem;
 }
 
-.tips__details__description>ul>li {
+.tips__details__description__hero>ul>li {
     display: inline;
     border: 1px solid #707070;
     padding: 0.2rem;
