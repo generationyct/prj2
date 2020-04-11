@@ -29,9 +29,22 @@ tipRouter.post('/tips', (req, res, next) => {
     })
 });
 
-tipRouter.get('/:tipId', (req, res, next) => {
+tipRouter.get('/tips/:tipId', (req, res, next) => {
+  console.log('The ID from the URL is: ', bookId);
   res.render('tip-details');
 });
+
+
+tipRouter.get('/tips/:tipId', (req, res, next) => {
+  Tip.findById(req.params.bookId)
+    .then(theTip => {
+      res.render('tip-details', { tip: theTip });
+    })
+    .catch(error => {
+      console.log('Error while retrieving tip details: ', error);
+    })
+});
+
 
 
 tipRouter.get('/tips-detail', (req, res) => {
