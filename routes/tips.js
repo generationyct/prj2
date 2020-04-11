@@ -33,7 +33,7 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
   Tip.findById(req.params.tipId)
     .then(theTip => {
       console.log(theTip)
-      res.render('tip-details', { tip: theTip });
+      res.render('tip-details', { user: req.user, tip: theTip });
     })
     .catch(error => {
       console.log('Error while retrieving tip details: ', error);
