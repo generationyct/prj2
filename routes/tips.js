@@ -7,7 +7,7 @@ const { ensureAuthenticated } = require('../config/auth')
 tipRouter.get('/tips', (req, res, next) => {
   Tip.find()
     .then(tipsFromDB => {
-      // console.log('Retrieved books from DB:', tipsFromDB);
+      // console.log('Retrieved tips from DB:', tipsFromDB);
       res.render('tips', { user: req.user, tips: tipsFromDB });
     })
     .catch(error => {
@@ -30,22 +30,15 @@ tipRouter.post('/tips', (req, res, next) => {
 });
 
 tipRouter.get('/tips/:tipId', (req, res, next) => {
-  console.log('The ID from the URL is: ', bookId);
-  res.render('tip-details');
-});
-
-
-tipRouter.get('/tips/:tipId', (req, res, next) => {
-  Tip.findById(req.params.bookId)
+  Tip.findById(req.params.tipId)
     .then(theTip => {
+      console.log(theTip)
       res.render('tip-details', { tip: theTip });
     })
     .catch(error => {
       console.log('Error while retrieving tip details: ', error);
     })
 });
-
-
 
 tipRouter.get('/tips-detail', (req, res) => {
   res.render('tips-detail')
@@ -58,9 +51,5 @@ tipRouter.get('/tips-detail', (req, res) => {
 tipRouter.get('/tips-add', (req, res) => {
   res.render('tips-add')
 })
-
-
-
-
 
 module.exports = tipRouter
