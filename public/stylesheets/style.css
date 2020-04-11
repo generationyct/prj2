@@ -33,7 +33,7 @@ body {
   /* box-sizing: border-box; */
 }
 .header-wrapper {
-  height: 70px;
+  height: 80px;
   background-color: white;
   display: flex;
   flex-direction: row;
@@ -84,9 +84,9 @@ body {
   margin-top: 0.2rem;
 }
 
-.container {
+/* .container {
   
-}
+} */
 
 /*----------------------- Footer Styles --------------------------*/
 .footer {
