@@ -47,15 +47,11 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
 });
 
 tipRouter.get('/tips-detail', (req, res) => {
-  res.render('tips-detail')
+  res.render('tips-detail', { user: req.user})
 })
 
-// tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
-//     res.render('tips-add')
-// })
-
-tipRouter.get('/tips-add', (req, res) => {
-  res.render('tips-add')
+tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
+    res.render('tips-add', { user: req.user})
 })
 
 module.exports = tipRouter
