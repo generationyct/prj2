@@ -25,10 +25,11 @@ const tipSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  author: [{
-    type: Schema.Types.ObjectId,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
     ref: 'UserPassport'
-  }]
+  }
 })
 
 const Tip = mongoose.model('Tip', tipSchema)

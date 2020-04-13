@@ -15,12 +15,16 @@ tipRouter.get('/tips', (req, res, next) => {
     })
 });
 
-tipRouter.post('/tips', (req, res, next) => {
+tipRouter.post('/tips', ensureAuthenticated, (req, res, next) => {
   console.log('Post route triggered');
-  const { name, category, description, website, address, imageUrl, date, author } = req.body;
-  const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
+  const tip = new Tip({
+    ...req.body,
+    author: req.user._id
+  })
+  // const { name, category, description, website, address, imageUrl, date, author } = req.body;
+  // const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
   console.log(Tip);
-  newTip.save()
+  tip.save()
     .then((tip) => {
       res.redirect('/tips');
     })
@@ -48,7 +52,7 @@ tipRouter.get('/tips-detail', (req, res) => {
 //     res.render('tips-add')
 // })
 
-tipRouter.get('/tips-add', (req, res) => {
+tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
   res.render('tips-add')
 })
 
