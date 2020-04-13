@@ -21,9 +21,6 @@ tipRouter.post('/tips', ensureAuthenticated, (req, res, next) => {
     ...req.body,
     author: req.user._id
   })
-  // const { name, category, description, website, address, imageUrl, date, author } = req.body;
-  // const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
-  console.log(Tip);
   tip.save()
     .then((tip) => {
       res.redirect('/tips');
