@@ -3,8 +3,10 @@ const passportUserRouter  = express.Router()
 const bcrypt              = require('bcryptjs')
 const passport            = require('passport')
 
-// User model
+// User and tip model
 const UserPassport = require('../../models/userPassport')
+const Tip          = require('../../models/tip')
+
 
 // login Page
 passportUserRouter.get('/login', (req, res, next) => {
@@ -15,6 +17,16 @@ passportUserRouter.get('/login', (req, res, next) => {
 // register Page
 passportUserRouter.get('/register', (req, res, next) => {
   res.render('passport/register', { title: 'Iron Food Passport' });
+});
+
+// Profile Page
+passportUserRouter.get('/profile', (req, res, next) => {
+  console.log('req.user' + req.user._id)
+  Tip.find({author: req.user._id})
+  .then(tipsByCurrentUser => {
+    console.log(tipsByCurrentUser)
+    res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
+  })
 });
 
 // Error page route
