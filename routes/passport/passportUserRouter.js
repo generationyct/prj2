@@ -30,10 +30,24 @@ passportUserRouter.get('/profile', (req, res, next) => {
   })
 });
 
-// Profile Avatar upload
+// Profile Avatar upload max 10MB files
 
 const upload = multer({
-  dest: 'uploads/avatars'
+    dest: 'uploads/avatars',
+    limits: {
+        fileSize: 10000000
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return cb(new Error('Please upload a image file'))
+      }
+      
+      cb(undefined, true)
+
+      // cb(new Error('File must be a image, png, jpg jpeg'))
+      // cb(undefined, true)
+      // cb(undefined, false)
+    }
 })
 
 passportUserRouter.post('/profile/avatar', upload.single('avatar'), (req, res) => {

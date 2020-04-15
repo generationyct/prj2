@@ -1,8 +1,9 @@
-const express = require('express')
-const Tip = require('../models/tip')
-const User = require('../models/user')
-const tipRouter = new express.Router()
+const express             = require('express')
+const Tip                 = require('../models/tip')
+const User                = require('../models/user')
+const tipRouter           = new express.Router()
 const { ensureAuthenticated } = require('../config/auth')
+const multer              = require('multer')
 
 tipRouter.get('/tips', (req, res, next) => {
   // console.log(req.user._id);
@@ -53,5 +54,31 @@ tipRouter.get('/tips-detail', (req, res) => {
 tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
     res.render('tips-add', { user: req.user})
 })
+
+// Tip image upload max 10MB files
+
+const upload = multer({
+  dest: 'uploads/tips',
+  limits: {
+      fileSize: 10000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Please upload a image file'))
+    }
+    
+    cb(undefined, true)
+
+    // cb(new Error('File must be a image, png, jpg jpeg'))
+    // cb(undefined, true)
+    // cb(undefined, false)
+  }
+})
+
+// Use post route for uploading tip images
+
+tipRouter.post('/tip/image', upload.single('tip'), (req, res) => {
+  res.send()
+  })
 
 module.exports = tipRouter
