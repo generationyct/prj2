@@ -34,7 +34,7 @@ passportUserRouter.get('/profile', (req, res, next) => {
 // Profile Avatar upload max 10MB files
 
 const upload = multer({
-    dest: 'uploads/avatars',
+    // dest: 'uploads/avatars',
     limits: {
         fileSize: 10000000
     },
@@ -51,7 +51,9 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile/avatar', ensureAuthenticated, upload.single('avatar'), (req, res) => {
+passportUserRouter.post('/profile/avatar', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
+    req.user.avatar = req.file.buffer
+    await req.user.save()
     res.send()
 },  (error, req, res, next) => {
     res.send(400).send({ error: error.message })
