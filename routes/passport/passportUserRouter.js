@@ -2,6 +2,7 @@ const express             = require('express')
 const passportUserRouter  = express.Router()
 const bcrypt              = require('bcryptjs')
 const passport            = require('passport')
+const multer              = require('multer')
 
 // User and tip model
 const UserPassport = require('../../models/userPassport')
@@ -28,6 +29,30 @@ passportUserRouter.get('/profile', (req, res, next) => {
     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
   })
 });
+
+// Profile Avatar upload max 10MB files
+
+const upload = multer({
+    dest: 'uploads/avatars',
+    limits: {
+        fileSize: 10000000
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        return cb(new Error('Please upload a image file'))
+      }
+      
+      cb(undefined, true)
+
+      // cb(new Error('File must be a image, png, jpg jpeg'))
+      // cb(undefined, true)
+      // cb(undefined, false)
+    }
+})
+
+passportUserRouter.post('/profile/avatar', upload.single('avatar'), (req, res) => {
+res.send()
+})
 
 // Error page route
 passportUserRouter.get('/error', (req, res, next) => {

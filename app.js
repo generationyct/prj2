@@ -72,10 +72,6 @@ hbs.registerPartials(__dirname + "/views/partials")
 // making response in json format possible for API
 app.use(express.json())
 
-// taking routes in
-// app.use('/', indexRouter)
-// app.use(userRouter)
-
 app.use('/', tipRouter)
 app.use(tipRouter)
 
@@ -84,6 +80,7 @@ app.use(passportRouter)
 
 app.use('/passport', passportUserRouter)
 app.use(passportUserRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
