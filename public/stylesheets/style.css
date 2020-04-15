@@ -51,6 +51,38 @@ body {
 .header-ctas {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+}
+
+.header-links {
+  display: flex;
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+  /* align-items: center; */
+  /* text-align: center; */
+  justify-content: space-between;
+}
+
+.header-link__item {
+  margin-left: 20rem;
+}
+
+.header-link__item, a {
+  color: black;
+  text-decoration: none;
+  font-size: 2rem;
+  font-family: rift,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.95px;
+  margin-bottom: -10px;
+  padding: 0;
+}
+
+
+.link-underline:hover {
+  border-bottom: 2px solid black;
 }
 
 .header-button {
