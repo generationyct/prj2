@@ -1,8 +1,9 @@
-const express             = require('express')
-const passportUserRouter  = express.Router()
-const bcrypt              = require('bcryptjs')
-const passport            = require('passport')
-const multer              = require('multer')
+const express               = require('express')
+const passportUserRouter    = express.Router()
+const bcrypt                = require('bcryptjs')
+const passport              = require('passport')
+const multer                = require('multer')
+const { ensureAuthenticated } = require('../../config/auth')
 
 // User and tip model
 const UserPassport = require('../../models/userPassport')
@@ -50,8 +51,10 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile/avatar', upload.single('avatar'), (req, res) => {
-res.send()
+passportUserRouter.post('/profile/avatar', ensureAuthenticated, upload.single('avatar'), (req, res) => {
+    res.send()
+},  (error, req, res, next) => {
+    res.send(400).send({ error: error.message })
 })
 
 // Error page route
