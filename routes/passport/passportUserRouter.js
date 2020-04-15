@@ -2,6 +2,7 @@ const express             = require('express')
 const passportUserRouter  = express.Router()
 const bcrypt              = require('bcryptjs')
 const passport            = require('passport')
+const multer              = require('multer')
 
 // User and tip model
 const UserPassport = require('../../models/userPassport')
@@ -28,6 +29,16 @@ passportUserRouter.get('/profile', (req, res, next) => {
     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
   })
 });
+
+// Profile Avatar upload
+
+const upload = multer({
+  dest: 'uploads/avatars'
+})
+
+passportUserRouter.post('/profile/avatar', upload.single('avatar'), (req, res) => {
+res.send()
+})
 
 // Error page route
 passportUserRouter.get('/error', (req, res, next) => {
