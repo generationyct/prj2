@@ -1,8 +1,9 @@
-const express             = require('express')
-const passportUserRouter  = express.Router()
-const bcrypt              = require('bcryptjs')
-const passport            = require('passport')
-const multer              = require('multer')
+const express               = require('express')
+const passportUserRouter    = express.Router()
+const bcrypt                = require('bcryptjs')
+const passport              = require('passport')
+const multer                = require('multer')
+const { ensureAuthenticated } = require('../../config/auth')
 
 // User and tip model
 const UserPassport = require('../../models/userPassport')
@@ -33,7 +34,7 @@ passportUserRouter.get('/profile', (req, res, next) => {
 // Profile Avatar upload max 10MB files
 
 const upload = multer({
-    dest: 'uploads/avatars',
+    // dest: 'uploads/avatars',
     limits: {
         fileSize: 10000000
     },
@@ -48,12 +49,20 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile', upload.single('avatar'), (req, res) => {
-  Tip.find({author: req.user._id})
-  .then(tipsByCurrentUser => {
-    console.log(tipsByCurrentUser)
-    res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
-  })
+
+// passportUserRouter.post('/profile', upload.single('avatar'), (req, res) => {
+//   Tip.find({author: req.user._id})
+//   .then(tipsByCurrentUser => {
+//     console.log(tipsByCurrentUser)
+//     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
+//   })
+
+passportUserRouter.post('/profile', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
+    req.user.avatar = req.file.buffer
+    await req.user.save()
+    res.send()
+},  (error, req, res, next) => {
+    res.send(400).send({ error: error.message })
 })
 
 // Error page route

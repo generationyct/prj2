@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema({
   picture: {
     type: String,
     default: 'img/user-1.svg'
+  },
+  avatar: {
+    type: Buffer
   }
 })
 
