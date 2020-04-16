@@ -60,7 +60,7 @@ const upload = multer({
 passportUserRouter.post('/profile', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
     req.user.avatar = req.file.buffer
     await req.user.save()
-    res.send()
+    res.render('user/profile', { title: 'User profile' });
 },  (error, req, res, next) => {
     res.send(400).send({ error: error.message })
 })
