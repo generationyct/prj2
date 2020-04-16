@@ -16,12 +16,14 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  picture: {
-    type: String,
-    default: 'img/user-1.svg'
-  },
+  // picture: {
+  //   type: String,
+  //   default: 'img/user-1.svg'
+  // },
   avatar: {
-    type: Buffer
+    type: Buffer,
+    default: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB...',
+    required: false
   }
 })
 

@@ -33,7 +33,7 @@ passportUserRouter.get('/profile', (req, res, next) => {
 // Profile Avatar upload max 10MB files
 
 const upload = multer({
-    dest: 'uploads/avatars',
+    // dest: 'uploads/avatars',
     limits: {
         fileSize: 10000000
     },
@@ -48,12 +48,31 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile', upload.single('avatar'), (req, res) => {
+passportUserRouter.post('/profile', upload.single('avatar'), async (req, res) => {
+  req.user.avatar = req.file.buffer
+  await req.user.save()
   Tip.find({author: req.user._id})
   .then(tipsByCurrentUser => {
     console.log(tipsByCurrentUser)
     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
   })
+})
+
+
+// route for profile pics
+
+passportUserRouter.get('/users/:id/avatar', async (req, res) => {
+  try {
+    const user = await UserPassport.findById(req.params.id)
+
+    if (!user || !user.avatar) {
+      throw new Error()
+    }
+    res.set('Content-Type', 'image/jpg')
+    res.send(user.avatar)
+    } catch (e) {
+      res.statu(404).send()
+    }
 })
 
 // Error page route
