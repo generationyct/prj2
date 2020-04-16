@@ -40,24 +40,18 @@ const upload = multer({
     },
     fileFilter(req, file, cb) {
       if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-        return cb(new Error('Please upload an image file in JPG or PNG format.'))
+        return cb(new Error('Please upload a image file'))
       }
+      
       cb(undefined, true)
+
       // cb(new Error('File must be a image, png, jpg jpeg'))
       // cb(undefined, true)
       // cb(undefined, false)
     }
 })
 
-
-// passportUserRouter.post('/profile', upload.single('avatar'), (req, res) => {
-//   Tip.find({author: req.user._id})
-//   .then(tipsByCurrentUser => {
-//     console.log(tipsByCurrentUser)
-//     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
-//   })
-
-passportUserRouter.post('/profile', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
+passportUserRouter.post('/profile/avatar', ensureAuthenticated, upload.single('avatar'), async (req, res) => {
     req.user.avatar = req.file.buffer
     await req.user.save()
     res.render('user/profile', { title: 'User profile' });
