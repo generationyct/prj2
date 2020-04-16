@@ -48,7 +48,7 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile/avatar', upload.single('avatar'), (req, res) => {
+passportUserRouter.post('/profile', upload.single('avatar'), (req, res) => {
   Tip.find({author: req.user._id})
   .then(tipsByCurrentUser => {
     console.log(tipsByCurrentUser)
