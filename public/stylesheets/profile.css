@@ -59,7 +59,7 @@ hr {
 }
 
 .profile__tips {
-        min-height: 60vh;
+        min-height: min-content;
         display: grid;
         max-width: 1200px;
         margin: auto;
@@ -89,6 +89,30 @@ hr {
         border: none;
         height: 2.5rem;
         width: 8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 0;
+}
+
+.profile__delete {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: snow;
+}
+
+.profile__delete__btn {
+        background: orangered 0% 0% no-repeat padding-box;
+        border-radius: 8px;
+        text-align: center;
+        font-size:16px;
+        color: #FFFFFF;
+        border: none;
+        height: 2.5rem;
+        width: 12rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
