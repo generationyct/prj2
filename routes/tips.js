@@ -47,19 +47,17 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
     })
 });
 
-//delete tip route
-tipRouter.post('/tips/:tipId/delete', async (req, res) => {
-  try {
-    const task = await Tip.findByIdAndDelete(req.params.tipId)
+tipRouter.post('/tips/:tipId/delete', function(req, res, next) {
+  Tip.findByIdAndDelete({ _id: req.params.tipId }, (err, theTip) => {
+    if (err) { return next(err); }
 
-    if (!tip) {
-      res.status(404).send()
-    }
-    res.send(tip)
-  } catch (e) {
-    res.status(505).send()
-  }
-})
+    theTip.remove((err) => {
+      if (err) { return next(err); }
+
+      res.redirect('/profile');
+    });
+  });
+});
 
 tipRouter.get('/tips-detail', (req, res) => {
   res.render('tips-detail', { user: req.user})
