@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   // },
   avatar: {
     type: Buffer,
-    default: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB...',
+    default: '',
     required: false
   }
 })

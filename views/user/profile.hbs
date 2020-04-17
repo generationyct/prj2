@@ -31,13 +31,16 @@
             <div class="tips__item__name">{{this.name}}</div>
             <div class="profile__tips__options">
                 <a href="/tips/{{this._id}}" class="profile__tips__options_btn">Edit tip</a>
-                <a href="#" class="profile__tips__options_btn">Delete tip</a>
+                {{!-- <a href="#" class="profile__tips__options_btn">Delete tip</a> --}}
+                <form action="/tips/{{this._id}}/delete" method="post">
+                    <input type="submit" value="Delete tip" class="profile__tips__options_btn">
+                </form>
             </div>
 
         </div>
         {{/each}}
     </div>
-        <div class="profile__delete">
+    <div class="profile__delete">
         <a href="#" class="profile__delete__btn">Delete your account</a>
     </div>
 </div>

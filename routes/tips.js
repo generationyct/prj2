@@ -47,6 +47,20 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
     })
 });
 
+//delete tip route
+tipRouter.post('/tips/:tipId/delete', async (req, res) => {
+  try {
+    const task = await Tip.findByIdAndDelete(req.params.tipId)
+
+    if (!tip) {
+      res.status(404).send()
+    }
+    res.send(tip)
+  } catch (e) {
+    res.status(505).send()
+  }
+})
+
 tipRouter.get('/tips-detail', (req, res) => {
   res.render('tips-detail', { user: req.user})
 })
@@ -54,6 +68,7 @@ tipRouter.get('/tips-detail', (req, res) => {
 tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
     res.render('tips-add', { user: req.user})
 })
+
 
 // Tip image upload max 10MB files
 
