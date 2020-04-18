@@ -51,12 +51,12 @@ const upload = multer({
     limits: {
         fileSize: 10000000
     },
-    fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-        return cb(new Error('Please upload an image file in JPG or PNG format.'))
-      }
-      cb(undefined, true)
-    }
+    // fileFilter(req, file, cb) {
+    //   if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+    //     return cb(new Error('Please upload an image file in JPG or PNG format.'))
+    //   }
+    //   cb(undefined, true)
+    // }
 })
 
 passportUserRouter.post('/profile', upload.single('avatar'), (req, res, next) => {
