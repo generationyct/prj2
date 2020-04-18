@@ -101,6 +101,18 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
     })
 });
 
+tipRouter.get('/tips/:tipId/edit', (req, res, next) => {
+  Tip.findById(req.params.tipId)
+  .populate('author')
+    .then(theTip => {
+      console.log(theTip)
+      res.render('tip/edit', { user: req.user, tip: theTip });
+    })
+    .catch(error => {
+      console.log('Error while retrieving tip details: ', error);
+    })
+});
+
 tipRouter.post('/tips/:tipId/delete', function(req, res, next) {
   Tip.findByIdAndDelete({ _id: req.params.tipId }, (err, theTip) => {
     if (err) { return next(err); }
