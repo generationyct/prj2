@@ -4,6 +4,12 @@ const bcrypt              = require('bcryptjs')
 const passport            = require('passport')
 const multer              = require('multer')
 
+// S3 Storage integration
+const aws                 = require('aws-sdk')
+const multerS3            = require('multer-s3')
+
+const s3 = new aws.S3()
+
 // User and tip model
 const UserPassport = require('../../models/userPassport')
 const Tip          = require('../../models/tip')
@@ -41,9 +47,6 @@ const upload = multer({
         return cb(new Error('Please upload an image file in JPG or PNG format.'))
       }
       cb(undefined, true)
-      // cb(new Error('File must be a image, png, jpg jpeg'))
-      // cb(undefined, true)
-      // cb(undefined, false)
     }
 })
 
