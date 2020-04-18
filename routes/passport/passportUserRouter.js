@@ -31,7 +31,6 @@ passportUserRouter.get('/profile', (req, res, next) => {
 });
 
 // Profile Avatar upload max 10MB files
-
 const upload = multer({
     // dest: 'uploads/avatars',
     limits: {

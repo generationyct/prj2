@@ -1,41 +1,39 @@
-
 <div class="tips__add__form">
 
-    <form action="/tips" method="POST">
+        <form action="/tips" method="POST" enctype="multipart/form-data">
 
-        <label for="name-input">What is the name of your food tip?</label>
-        <input id="name-input" type="text" name="name" placeholder="Name of the place">
+                <label for="name-input">What is the name of your food tip?</label>
+                <input id="name-input" type="text" name="name" placeholder="Name of the place">
 
+                <label for="category-input">What should we get there?</label>
+                <div class="tips__add__category">
+                        <input type="radio" id="coffee" name="category" value="Coffee">
+                        <label for="coffee">Coffee</label>
 
-        <label for="category-input">What should we get there?</label>
-        <div class="tips__add__category">
-        <input type="radio" id="coffee" name="category" value="Coffee">
-                <label for="coffee">Coffee</label>
+                        <input type="radio" id="lunch" name="category" value="Lunch">
+                        <label for="lunch">Lunch</label>
 
+                        <input type="radio" id="snacks" name="category" value="Snacks">
+                        <label for="snacks">Snacks</label>
 
-        <input type="radio" id="lunch" name="category" value="Lunch">
-                <label for="lunch">Lunch</label>
+                        <input type="radio" id="dinner" name="category" value="Dinner">
+                        <label for="dinner">Dinner</label>
 
+                </div>
 
-        <input type="radio" id="snacks" name="category" value="Snacks">
-                <label for="snacks">Snacks</label>
+                <label for="description">What do we need to know about this place?</label>
 
+                <textarea id="description" name="description" rows="5" cols="33"
+                        placeholder="This place offers ... and is great because ..."></textarea>
 
+                <label for="photo">Pic or it did not happen!</label>
+                <input type="file" name="photo">
 
-        <input type="radio" id="dinner" name="category" value="Dinner">
-                <label for="dinner">Dinner</label>
+                <label for="address">Website</label>
+                <input type="text" id="website" name="website" placeholder="www.example.com">
 
-        </div>
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="e.g. Prinsengracht 102, 1017NK Amsterdam">
 
-        <label for="description">What do we need to know about this place?</label>
-
-        <textarea id="description" name="description" rows="5" cols="33" placeholder="This place offers ... and is great because ..."></textarea>
-
-        <label for="address">Website</label>
-        <input type="text" id="website" name="website" placeholder="www.example.com">
-
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address" placeholder="e.g. Prinsengracht 102, 1017NK Amsterdam">
-
-        <input type="submit" value="Submit" id="btn-submit">
-    </form>
+                <input type="submit" value="Submit" id="btn-submit">
+        </form>
