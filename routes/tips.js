@@ -1,6 +1,5 @@
 const express             = require('express')
 const Tip                 = require('../models/tip')
-const User                = require('../models/user')
 const tipRouter           = new express.Router()
 const { ensureAuthenticated } = require('../config/auth')
 const multer              = require('multer')
