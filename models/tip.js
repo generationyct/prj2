@@ -29,6 +29,11 @@ const tipSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'UserPassport'
+  },
+  photo: {
+    type: Buffer,
+    default: '',
+    required: false
   }
 })
 
