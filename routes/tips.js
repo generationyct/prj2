@@ -91,7 +91,7 @@ tipRouter.get('/tips/:id/photo', async (req, res) => {
 
 tipRouter.get('/tips/:tipId', (req, res, next) => {
   Tip.findById(req.params.tipId)
-  .populate('author', 'name')
+  .populate('author')
     .then(theTip => {
       console.log(theTip)
       res.render('tip-details', { user: req.user, tip: theTip });
