@@ -1,9 +1,7 @@
 <div class="profile">
 
     <div class="profile__author">
-        {{!-- <img src="data:image/jpg;base64,{{user.avatar}}" alt="" class="profile__author__avatar"> --}}
-
-        <img src="/users/{{user._id}}/avatar" alt="profile picture" class="profile__author__avatar">
+        <img src="{{user.avatar}}" alt="profile picture" class="profile__author__avatar">
         <div class="profile__author__details">
             <h1>{{user.name}}'s profile page</h1>
             <h3>{{user.email}}</h3>
@@ -20,23 +18,20 @@
         <hr>
     </section>
 
-
-
     <h2>Your tips</h2>
     <div class="profile__tips">
         {{#each tips}}
         <div class="tips__item">
             <div class="tips__item__title">{{this.category}}</div>
-            <img src="img/cat_{{this.category}}.png" alt="" class="tips__item__image">
+            <img src="{{this.photo}}" alt="" class="tips__item__image">
             <div class="tips__item__name">{{this.name}}</div>
             <div class="profile__tips__options">
-                <a href="/tips/{{this._id}}" class="profile__tips__options_btn">Edit tip</a>
+                <a href="/tips/{{this._id}}/edit" class="profile__tips__options_btn">Edit tip</a>
                 {{!-- <a href="#" class="profile__tips__options_btn">Delete tip</a> --}}
                 <form action="/tips/{{this._id}}/delete" method="post">
                     <input type="submit" value="Delete tip" class="profile__tips__options_btn">
                 </form>
             </div>
-
         </div>
         {{/each}}
     </div>

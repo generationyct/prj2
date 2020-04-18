@@ -70,23 +70,6 @@ passportUserRouter.post('/profile', upload.single('avatar'), async (req, res, ne
   }).catch(error => next(error))
 })
 
-
-// route for profile pics
-
-passportUserRouter.get('/users/:id/avatar', async (req, res) => {
-  try {
-    const user = await UserPassport.findById(req.params.id)
-
-    if (!user || !user.avatar) {
-      throw new Error()
-    }
-    res.set('Content-Type', 'image/jpg')
-    res.send(user.avatar)
-    } catch (e) {
-      res.status(404).send()
-    }
-})
-
 // Error page route
 passportUserRouter.get('/error', (req, res, next) => {
   res.render('passport/error', { title: 'Iron Food Passport Error' });
@@ -143,7 +126,6 @@ passportUserRouter.post('/register', (req, res) => {
             email,
             password
           })
-
 
           // Hash Password
           bcrypt.genSalt(10, (err, salt) => 

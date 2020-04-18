@@ -12,22 +12,15 @@
         <div class="tips__details__description__info">
             <div class="tips__details__description__review">
                 <div class="tips__details__author">
-                    <img src="../img/user-1.svg" alt="" class="tips__details__author__avatar">
+                    <img src="{{tip.author.avatar}}" alt="" class="tips__details__author__avatar">
                     <h3>Tip by {{tip.author.name}}</h3>
                 </div>
                 <p>{{tip.description}}</p>
                 <a href="{{tip.website}}" class="tips__details__description__link">Link to {{tip.name}}'s website</a>
             </div>
-            {{!-- <div class="tips__details__description__openinghours">
-                <h3>Opening hours</h3>
-                <p>Monday: 09.00 - 18.00 <br>Tuesday: 09.00 - 18.00 <br>Wednesday: 09.00 - 18.00 <br>Thursday: 09.00 -
-                    18.00
-                    <br>Friday: 09.00 - 18.00 <br>Saturday: 09.00 - 18.00 <br>Sunday: 09.00 - 18.00
-                </p>
-            </div> --}}
         </div>
     </div>
     <div class="tips__details__image">
-        <img src="/tips/{{tip._id}}/photo" alt="Tip picture">
+        <img src="{{tip.photo}}" alt="Tip picture" class="tips__details__photo">
     </div>
 </div>

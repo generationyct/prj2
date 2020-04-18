@@ -54,3 +54,11 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.tips__details__image {
+    max-width: 5rem;
+}
+
+.tips__details__photo {
+    max-height: 50vh;
+}

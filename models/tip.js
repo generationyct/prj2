@@ -31,9 +31,9 @@ const tipSchema = new mongoose.Schema({
     ref: 'UserPassport'
   },
   photo: {
-    type: Buffer,
-    default: '',
-    required: false
+    type: String,
+    required: false,
+    default: '/img/cat_lunch.png'
   }
 })
 
