@@ -59,9 +59,9 @@ const upload = multer({
     // }
 })
 
-passportUserRouter.post('/profile', upload.single('avatar'), (req, res, next) => {
+passportUserRouter.post('/profile', upload.single('avatar'), async (req, res, next) => {
   console.log('Post profile');
-  UserPassport.updateOne({_id: req.user._id}, { avatar: req.file.location })
+  await UserPassport.updateOne({ _id: req.user._id }, { avatar: req.file.location })
   .catch(error => next(error))
   Tip.find({author: req.user._id})
   .then(tipsByCurrentUser => {
@@ -83,7 +83,7 @@ passportUserRouter.get('/users/:id/avatar', async (req, res) => {
     res.set('Content-Type', 'image/jpg')
     res.send(user.avatar)
     } catch (e) {
-      res.statu(404).send()
+      res.status(404).send()
     }
 })
 
