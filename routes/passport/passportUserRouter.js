@@ -39,6 +39,15 @@ passportUserRouter.get('/profile', (req, res, next) => {
 // Profile Avatar upload max 10MB files
 const upload = multer({
     // dest: 'uploads/avatars',
+
+    storage: multerS3({
+      s3: s3,
+      bucket: 'iron-express-files',
+      acl: 'public-read',
+      key: function(req, file, cb) {
+        cb(null, Date.now().toString())
+      }
+    }),
     limits: {
         fileSize: 10000000
     },
@@ -50,14 +59,15 @@ const upload = multer({
     }
 })
 
-passportUserRouter.post('/profile', upload.single('avatar'), async (req, res) => {
-  req.user.avatar = req.file.buffer
-  await req.user.save()
+passportUserRouter.post('/profile', upload.single('avatar'), (req, res, next) => {
+  console.log('Post profile');
+  UserPassport.updateOne({_id: req.user._id}, { avatar: req.file.location })
+  .catch(error => next(error))
   Tip.find({author: req.user._id})
   .then(tipsByCurrentUser => {
     console.log(tipsByCurrentUser)
     res.render('user/profile', { title: 'User profile' , user: req.user, tips: tipsByCurrentUser});
-  })
+  }).catch(error => next(error))
 })
 
 
