@@ -17,23 +17,77 @@ tipRouter.get('/tips', (req, res, next) => {
     })
 });
 
-tipRouter.post('/tips', ensureAuthenticated, (req, res, next) => {
+
+// Tip photo upload max 10MB files
+const tipupload = multer({
+  // dest: 'uploads/avatars',
+  limits: {
+      fileSize: 10000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Please upload an image file in JPG or PNG format.'))
+    }
+    cb(undefined, true)
+    // cb(new Error('File must be a image, png, jpg jpeg'))
+    // cb(undefined, true)
+    // cb(undefined, false)
+  }
+})
+
+tipRouter.post('/tips', ensureAuthenticated, tipupload.single('photo'), (req, res, next) => {
   console.log('Post route triggered');
-  const tip = new Tip({
-    ...req.body,
-    author: req.user._id
-  })
-  // const { name, category, description, website, address, imageUrl, date, author } = req.body;
-  // const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
-  console.log(Tip);
-  tip.save()
+  if (req.file) {
+    const tip = new Tip({
+      ...req.body,
+      author: req.user._id,
+      photo: req.file.buffer
+    })
+    tip.save()
     .then((tip) => {
       res.redirect('/tips');
     })
     .catch((error) => {
       console.log(error);
     })
+  } else {
+    console.log('else triggered')
+    const tip = new Tip({
+      ...req.body,
+      author: req.user._id
+    })
+    tip.save()
+    .then((tip) => {
+      res.redirect('/tips');
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+  // const { name, category, description, website, address, imageUrl, date, author } = req.body;
+  // const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
+  // console.log(Tip);
+    // .catch((error) => {
+    //   console.log(error);
+    // })
 });
+
+// route for tip photo
+
+tipRouter.get('/tips/:id/photo', async (req, res) => {
+  try {
+    const tip = await Tip.findById(req.params.id)
+
+    if (!tip || !tip.photo) {
+      throw new Error()
+    }
+    res.set('Content-Type', 'image/jpg')
+    res.send(tip.photo)
+    } catch (e) {
+      res.statu(404).send()
+    }
+})
+
 
 tipRouter.get('/tips/:tipId', (req, res, next) => {
   Tip.findById(req.params.tipId)
