@@ -4,6 +4,12 @@ const tipRouter           = new express.Router()
 const { ensureAuthenticated } = require('../config/auth')
 const multer              = require('multer')
 
+// S3 Storage integration
+const aws                 = require('aws-sdk')
+const multerS3            = require('multer-s3')
+
+const s3 = new aws.S3()
+
 tipRouter.get('/tips', (req, res, next) => {
   // console.log(req.user._id);
   Tip.find()
@@ -17,30 +23,47 @@ tipRouter.get('/tips', (req, res, next) => {
 });
 
 
+// // Tip photo upload max 10MB files
+// const tipupload = multer({
+//   // dest: 'uploads/avatars',
+//   limits: {
+//       fileSize: 10000000
+//   },
+//   fileFilter(req, file, cb) {
+//     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+//       return cb(new Error('Please upload an image file in JPG or PNG format.'))
+//     }
+//     cb(undefined, true)
+//     // cb(new Error('File must be a image, png, jpg jpeg'))
+//     // cb(undefined, true)
+//     // cb(undefined, false)
+//   }
+// })
+
 // Tip photo upload max 10MB files
-const tipupload = multer({
+const tipPhotoUpload = multer({
   // dest: 'uploads/avatars',
+
+  storage: multerS3({
+    s3: s3,
+    bucket: 'iron-express-files',
+    acl: 'public-read',
+    key: function(req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  }),
   limits: {
       fileSize: 10000000
   },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Please upload an image file in JPG or PNG format.'))
-    }
-    cb(undefined, true)
-    // cb(new Error('File must be a image, png, jpg jpeg'))
-    // cb(undefined, true)
-    // cb(undefined, false)
-  }
 })
 
-tipRouter.post('/tips', ensureAuthenticated, tipupload.single('photo'), (req, res, next) => {
+tipRouter.post('/tips', ensureAuthenticated, tipPhotoUpload.single('photo'), (req, res, next) => {
   console.log('Post route triggered');
   if (req.file) {
     const tip = new Tip({
       ...req.body,
       author: req.user._id,
-      photo: req.file.buffer
+      photo: req.file.location
     })
     tip.save()
     .then((tip) => {
@@ -63,30 +86,7 @@ tipRouter.post('/tips', ensureAuthenticated, tipupload.single('photo'), (req, re
       console.log(error);
     })
   }
-  // const { name, category, description, website, address, imageUrl, date, author } = req.body;
-  // const newTip = new Tip({ name, category, description, website, address, imageUrl, date, author })
-  // console.log(Tip);
-    // .catch((error) => {
-    //   console.log(error);
-    // })
 });
-
-// route for tip photo
-
-tipRouter.get('/tips/:id/photo', async (req, res) => {
-  try {
-    const tip = await Tip.findById(req.params.id)
-
-    if (!tip || !tip.photo) {
-      throw new Error()
-    }
-    res.set('Content-Type', 'image/jpg')
-    res.send(tip.photo)
-    } catch (e) {
-      res.statu(404).send()
-    }
-})
-
 
 tipRouter.get('/tips/:tipId', (req, res, next) => {
   Tip.findById(req.params.tipId)
@@ -100,6 +100,19 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
     })
 });
 
+// tip photo upload route
+tipRouter.post('/tips/:tipId/edit', tipPhotoUpload.single('photo'), async (req, res, next) => {
+console.log('Post tip');
+await Tip.updateOne({ _id: req.params.tipId }, { photo: req.file.location })
+.catch(error => next(error))
+Tip.find({author: req.user._id})
+.then(tipsByCurrentUser => {
+  console.log(tipsByCurrentUser)
+  res.redirect('/profile');
+}).catch(error => next(error))
+})
+
+// get route for editing a tip
 tipRouter.get('/tips/:tipId/edit', (req, res, next) => {
   Tip.findById(req.params.tipId)
   .populate('author')
@@ -112,6 +125,8 @@ tipRouter.get('/tips/:tipId/edit', (req, res, next) => {
     })
 });
 
+
+// post route for deleting a tip
 tipRouter.post('/tips/:tipId/delete', function(req, res, next) {
   Tip.findByIdAndDelete({ _id: req.params.tipId }, (err, theTip) => {
     if (err) { return next(err); }
@@ -133,30 +148,23 @@ tipRouter.get('/tips-add', ensureAuthenticated, (req, res) => {
 })
 
 
-// Tip image upload max 10MB files
+// // Tip image upload max 10MB files
+// const upload = multer({
+//   dest: 'uploads/tips',
+//   limits: {
+//       fileSize: 10000000
+//   },
+//   fileFilter(req, file, cb) {
+//     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+//       return cb(new Error('Please upload a image file'))
+//     }
+//     cb(undefined, true)
+//   }
+// })
 
-const upload = multer({
-  dest: 'uploads/tips',
-  limits: {
-      fileSize: 10000000
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Please upload a image file'))
-    }
-    
-    cb(undefined, true)
-
-    // cb(new Error('File must be a image, png, jpg jpeg'))
-    // cb(undefined, true)
-    // cb(undefined, false)
-  }
-})
-
-// Use post route for uploading tip images
-
-tipRouter.post('/tip/image', upload.single('tip'), (req, res) => {
-  res.send()
-  })
+// // Use post route for uploading tip images
+// tipRouter.post('/tip/image', upload.single('tip'), (req, res) => {
+//   res.send()
+//   })
 
 module.exports = tipRouter
