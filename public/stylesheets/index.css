@@ -1,4 +1,4 @@
-.hero {
+/* .hero {
     background-image: url(../img/hero-bg.jpg);
     height: 100%;
     background-size: cover;
@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     height: 50vh;
-}
+} */
 
 .hero__title {
     max-width: 900px;
@@ -73,6 +73,7 @@
 
 .teaser__item__title {
     height: 20%;
+    color: #333;
     font-size: 1.2rem;
     font-weight: 700;
     display: flex;

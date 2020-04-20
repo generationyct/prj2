@@ -116,9 +116,9 @@ body {
   margin-top: 0.2rem;
 }
 
-/* .container {
-  
-} */
+.container {
+  margin-top: 0px;
+}
 
 /*----------------------- Footer Styles --------------------------*/
 .footer {

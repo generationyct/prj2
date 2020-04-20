@@ -1,0 +1,137 @@
+/*--- fonts used from Adobe fonts ----
+
+/*  font-family: rift,sans-serif;
+    font-weight: 400;
+    font-style: normal; */
+/* 
+    font-family: rift,sans-serif;
+    font-weight: 400;
+    font-style: italic; */
+
+/*  font-family: rift,sans-serif;
+    font-weight: 700;
+    font-style: italic; */
+
+/*  font-family: rift,sans-serif;
+    font-weight: 700;
+    font-style: normal; */
+
+/*----------------------- Header Styles --------------------------*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: rift,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  line-height: 1.6;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  height: 56vh;
+  width: 100vw;
+}
+
+.slide {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 56vh;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.slide.current {
+  opacity: 1;
+}
+
+.slide .content {
+  position: absolute;
+  color: #333;
+  bottom: 100px;
+  margin-left: 30px;
+  opacity: 0;
+  left: -600px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.slide .content, h1, h3 {
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
+.slide.current .content {
+  opacity: 1;
+  transform: translateX(600px);
+  transition: all 0.7s ease-in-out 0.3s;
+}
+
+.buttons button#next {
+  position: absolute;
+  top: 30%;
+  right: 15px;
+}
+
+.buttons button#prev {
+  position: absolute;
+  top: 30%;
+  left: 15px;
+}
+
+.buttons button {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+.fas {
+  font-size: 25px;
+}
+
+@media(max-width: 500px) {
+  .slide .content {
+    bottom: -300px;
+    left: 0;
+    width: 100%;
+  }
+
+  .slide.current .content {
+    transform: translateX(-300px);
+  }
+}
+
+.slide:first-child {
+  background: url(/img/ironhackadam.jpg) no-repeat center center/cover;
+}
+.slide:nth-child(2) {
+  background: url(/img/ramen.jpg) no-repeat center top/cover;
+}
+.slide:nth-child(3) {
+  background: url(/img/padthai-small.jpg) no-repeat
+    center top/cover;
+}
+.slide:nth-child(4) {
+  background: url(/img/pizza.jpg) no-repeat
+    center top/cover;
+}
+/* .slide:nth-child(5) {
+  background: url(/img/pinchos.jpg) no-repeat
+    center top/cover;
+} */
