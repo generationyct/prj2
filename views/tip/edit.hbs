@@ -1,9 +1,46 @@
-<section class="profile__avatar__upload">
-    <hr>
-    <h2>Upload your photo</h2>
-    <form action="/tips/{{tip._id}}/edit" method="post" enctype="multipart/form-data">
-        <input type="file" name="photo" class="profile__fileinput">
-        <input type="submit" value="Upload" class="profile__uploadbtn">
+<div class="tips__add__form">
+
+
+    <section class="profile__avatar__upload">
+        <hr>
+        <h2>Upload your photo</h2>
+        <form action="/tips/{{tip._id}}/edit-photo" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" class="profile__fileinput">
+            <input type="submit" value="Upload" class="profile__uploadbtn">
+        </form>
+        <hr>
+    </section>
+
+    <form action="/tips/{{tip._id}}/edit" method="POST">
+
+        <label for="name-input">What is the name of your food tip?</label>
+        <input id="name-input" type="text" name="name" placeholder="Name of the place" value="{{tip.name}}">
+
+        {{!-- <label for="category-input">What should we get there?</label>
+        <div class="tips__add__category">
+            <input type="radio" id="coffee" name="category" value="Coffee">
+            <label for="coffee">Coffee</label>
+
+            <input type="radio" id="lunch" name="category" value="Lunch">
+            <label for="lunch">Lunch</label>
+
+            <input type="radio" id="snacks" name="category" value="Snacks">
+            <label for="snacks">Snacks</label>
+
+            <input type="radio" id="dinner" name="category" value="Dinner">
+            <label for="dinner">Dinner</label>
+
+        </div> --}}
+
+        <label for="description">What do we need to know about this place?</label>
+
+        <textarea id="description" name="description" rows="5" cols="33">{{tip.description}}</textarea>
+
+        <label for="address">Website</label>
+        <input type="text" id="website" name="website" placeholder="www.example.com"  value="{{tip.website}}">
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="e.g. Prinsengracht 102, 1017NK Amsterdam"  value="{{tip.address}}">
+
+        <input type="submit" value="Update" id="btn-submit">
     </form>
-    <hr>
-</section>
