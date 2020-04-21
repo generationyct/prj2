@@ -101,7 +101,7 @@ tipRouter.get('/tips/:tipId', (req, res, next) => {
 });
 
 // tip photo upload route
-tipRouter.post('/tips/:tipId/edit', tipPhotoUpload.single('photo'), async (req, res, next) => {
+tipRouter.post('/tips/:tipId/edit-photo', tipPhotoUpload.single('photo'), async (req, res, next) => {
 console.log('Post tip');
 await Tip.updateOne({ _id: req.params.tipId }, { photo: req.file.location })
 .catch(error => next(error))
@@ -125,6 +125,57 @@ tipRouter.get('/tips/:tipId/edit', (req, res, next) => {
     })
 });
 
+// post route for editing a tip (without image)
+// tipRouter.post('/tips/:tipId/edit', function (req, res, next) {
+//   const updatedTip = {
+//     name: req.body.name,
+//     description: req.body.description,
+//     website: req.body.website,
+//     address: req.body.address
+//   }
+//   Tip.updateOne({_id: req.params.id}, updatedTip, (err, theTip) => {
+//     if (err) {return next(err); }
+
+//     res.redirect('/profile');
+//   });
+// });
+
+
+tipRouter.post('/tips/:tipId/edit', async (req, res, next) => {
+  console.log('edit tip');
+    const updatedTip = {
+    name: req.body.name,
+    description: req.body.description,
+    website: req.body.website,
+    address: req.body.address
+  }
+  console.log(req.body.name)
+  console.log(req.body.description)
+  console.log(req.body.website)
+  console.log(req.body.address)
+  await Tip.updateOne({ _id: req.params.tipId }, updatedTip)
+  .catch(error => next(error))
+  Tip.find({author: req.user._id})
+  .then(tipsByCurrentUser => {
+    console.log(tipsByCurrentUser)
+    res.redirect('/profile');
+  }).catch(error => next(error))
+  })
+
+
+// tipRouter.post('/tips/:tipId/edit', ensureAuthenticated, function (req, res, next) {
+//   const updatedTip = {
+//     name: req.body.name,
+//     description: req.body.description,
+//     website: req.body.website,
+//     address: req.body.address
+//   }
+//   Tip.update({_id: req.params.tipId}, updatedTip), (err, theTip) => {
+//     if (err) {return next(err); }
+
+//     res.redirect('/profile');
+//   });
+// });
 
 // post route for deleting a tip
 tipRouter.post('/tips/:tipId/delete', function(req, res, next) {
